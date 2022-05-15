@@ -1,0 +1,83 @@
+import turtle
+import math
+import random
+import winsound
+
+
+wn = turtle.Screen()
+wn.bgcolor('light blue')
+
+t = turtle.Turtle()
+t.penup()
+t.setpos(-200,-200)
+t.pendown()
+t.pensize(3)
+t.hideturtle()
+t.speed(0)
+
+
+for i in range(4):
+	t.forward(400)
+	t.left(90)
+
+
+
+p = turtle.Turtle()
+p.shape('triangle')
+p.shapesize(1, 1.25)
+p.color('black')
+p.penup()
+p.speed(0)
+
+
+b = turtle.Turtle()
+b.shape('circle')
+b.color('green')
+b.penup()
+b.speed(0)
+b.setpos(100, 50)
+
+
+def turnright():
+	p.right(30)
+def turnleft():
+	p.left(30)
+
+
+turtle.listen()
+turtle.onkey(turnright,'Right')
+turtle.onkey(turnleft,'Left')
+
+score = 0
+
+speed = 1
+
+while True:
+	p.fd(speed)
+
+	if p.xcor()>200 or p.xcor()<-200:
+		p.right(180)
+	if p.ycor()>200 or p.ycor()<-200:
+		p.right(180)
+
+
+	di = math.sqrt(math.pow(p.xcor()-b.xcor(), 2)+ 
+		math.pow(p.ycor()-b.ycor(), 2))
+	if di < 15:
+		b.setpos(random.randint(-200, 200), random.randint(-200, 200))
+		winsound.Beep(1200, 90)
+		score+=1
+		t.undo()
+		t.penup()
+		t.setpos(150, 200)
+		t.pensize(90)
+		t.write("Кирилл МУДИЛА")
+		t.hideturtle()
+		t.setpos(-180, 210)
+		scorestring = 'Score: %s'%score
+		t.write(scorestring, align='left', font=('Arial', 14,'bold'))
+		
+
+
+r = input('press any key')	
+r=raw_input('press any key')
